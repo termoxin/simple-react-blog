@@ -1,5 +1,5 @@
 import App from "./components/App";
-import User from "./containers/UserContainer";
+import Post from "./containers/PostContainer";
 
 const routes = [
   {
@@ -8,8 +8,8 @@ const routes = [
     exact: true
   },
   {
-    path: "/:username",
-    component: User
+    path: "/:id",
+    component: Post
   }
 ];
 

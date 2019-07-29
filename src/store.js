@@ -28,7 +28,7 @@ export const store = createStore(
 );
 
 const axiosInstance = axios.create({
-  baseURL: "https://api.github.com"
+  baseURL: "https://simple-blog-api.crew.red"
 });
 
 sagaMiddleware.run(saga, axiosInstance);

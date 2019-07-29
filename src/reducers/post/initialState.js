@@ -1,5 +1,5 @@
 const initialState = {
-  user: null,
+  post: null,
   error: null,
   pending: 0,
   loading: false
