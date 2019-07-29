@@ -9,6 +9,7 @@ const routes = [
   },
   {
     path: "/:id",
+    exact: true,
     component: Post
   }
 ];

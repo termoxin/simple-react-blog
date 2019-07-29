@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import _ from "lodash";
 import Post from "../components/Post";
+import PostNotFound from "../components/Post/PostNotFound";
+import Spinner from "../components/Spinner";
 import { getPost } from "../actions/post";
 
 class PostContainer extends Component {
@@ -11,16 +14,20 @@ class PostContainer extends Component {
   }
 
   render() {
-    const { loading, post } = this.props;
+    const { loading, post, error } = this.props;
 
-    // return (!loading && post && <Post />) || "Loading...";
-    return <Post />;
+    if (!loading && !_.isNull(post)) {
+      return <Post post={post} />;
+    } else {
+      return error ? <PostNotFound /> : <Spinner />;
+    }
   }
 }
 
 const mapStateToProps = state => ({
   post: state.post.post,
-  loading: state.post.loading
+  loading: state.post.loading,
+  error: state.post.error
 });
 
 const mapDispatchToProps = {
