@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import Spinner from "../components/Spinner";
@@ -6,14 +6,56 @@ import Posts from "../components/Posts";
 import { getPosts } from "../actions/posts";
 
 class PostsContainer extends Component {
+  state = { visible: false, name: "", author: "", text: "" };
+
+  showModal = () => {
+    this.setState({
+      visible: true
+    });
+  };
+
+  handleOk = () => {
+    this.setState({
+      visible: false
+    });
+  };
+
+  handleCancel = () => {
+    this.setState({
+      visible: false
+    });
+  };
+
+  handleChange = e => {
+    const { name, value } = e.target;
+
+    this.setState({
+      [name]: value
+    });
+  };
+
   componentDidMount() {
     this.props.getPosts();
   }
 
   render() {
     const { loading, posts } = this.props;
+    const { visible } = this.state;
 
-    return !loading && !_.isNull(posts) ? <Posts posts={posts} /> : <Spinner />;
+    return !loading && !_.isNull(posts) ? (
+      <Fragment>
+        <Posts
+          posts={posts}
+          visible={visible}
+          handleOk={this.handleOk}
+          handleCancel={this.handleCancel}
+          showModal={this.showModal}
+          onHandleChange={this.handleChange}
+        />
+      </Fragment>
+    ) : (
+      <Spinner />
+    );
   }
 }
 

@@ -14,7 +14,7 @@ const Post = ({ post: [content, comments], onCreateComment, onGetPost }) => {
   const { title, body, creator, id } = content;
 
   return (
-    <StyledLayout>
+    <StyledLayout theme="light">
       <Content>
         <Title>{title}</Title>
         <Paragraph>{body}</Paragraph>

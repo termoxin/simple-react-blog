@@ -5,4 +5,7 @@ export const StyledLayout = styled(Layout)`
   display: flex;
   justify-content: center;
   align-items: center;
+  && {
+    background: #fff;
+  }
 `;
