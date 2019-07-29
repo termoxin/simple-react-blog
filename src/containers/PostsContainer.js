@@ -4,6 +4,7 @@ import _ from "lodash";
 import Spinner from "../components/Spinner";
 import Posts from "../components/Posts";
 import { getPosts } from "../actions/posts";
+import { createPost } from "../actions/post";
 
 class PostsContainer extends Component {
   state = { visible: false, name: "", author: "", text: "" };
@@ -15,9 +16,18 @@ class PostsContainer extends Component {
   };
 
   handleOk = () => {
-    this.setState({
-      visible: false
-    });
+    const { getPosts, createPost } = this.props;
+    const { name, author, text } = this.state;
+
+    if (name && author && text) {
+      createPost({ title: name, creator: author, body: text }).then(() => {
+        getPosts();
+      });
+
+      this.setState({
+        visible: false
+      });
+    }
   };
 
   handleCancel = () => {
@@ -66,7 +76,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getPosts
+  getPosts,
+  createPost
 };
 
 export default connect(

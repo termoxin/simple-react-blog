@@ -18,7 +18,7 @@ const Post = ({ post: [content, comments], onCreateComment, onGetPost }) => {
       <Content>
         <Title>{title}</Title>
         <Paragraph>{body}</Paragraph>
-        <Text>Author: {"Unknown" || creator}</Text>
+        <Text>Author: {creator || "Unknown"}</Text>
       </Content>
       {comments && (
         <Comments
