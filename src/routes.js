@@ -1,16 +1,17 @@
-import App from "./components/App";
+// import App from "./components/App";
 import Post from "./containers/PostContainer";
+import Posts from "./containers/PostsContainer";
 
 const routes = [
   {
-    path: "/",
-    component: App,
-    exact: true
-  },
-  {
-    path: "/:id",
+    path: "/posts/:id",
     exact: true,
     component: Post
+  },
+  {
+    path: "/",
+    exact: true,
+    component: Posts
   }
 ];
 

@@ -4,9 +4,13 @@ import { Comment, List } from "antd";
 const CommentList = ({ comments }) => (
   <List
     dataSource={comments}
-    header={`${comments.length} ${comments.length > 1 ? "replies" : "reply"}`}
+    header={`${comments.length} ${
+      comments.length > 1 ? "comments" : "comment"
+    }`}
     itemLayout="horizontal"
-    renderItem={props => <Comment {...props} />}
+    renderItem={({ creator, body }) => (
+      <Comment author={creator} content={<p>{body}</p>} />
+    )}
   />
 );
 

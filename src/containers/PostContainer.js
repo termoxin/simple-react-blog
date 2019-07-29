@@ -5,6 +5,7 @@ import Post from "../components/Post";
 import PostNotFound from "../components/Post/PostNotFound";
 import Spinner from "../components/Spinner";
 import { getPost } from "../actions/post";
+import { createComment } from "../actions/comments";
 
 class PostContainer extends Component {
   componentDidMount() {
@@ -14,10 +15,12 @@ class PostContainer extends Component {
   }
 
   render() {
-    const { loading, post, error } = this.props;
+    const { loading, post, error, createComment, getPost } = this.props;
 
     if (!loading && !_.isNull(post)) {
-      return <Post post={post} />;
+      return (
+        <Post post={post} onCreateComment={createComment} onGetPost={getPost} />
+      );
     } else {
       return error ? <PostNotFound /> : <Spinner />;
     }
@@ -31,7 +34,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getPost
+  getPost,
+  createComment
 };
 
 export default connect(

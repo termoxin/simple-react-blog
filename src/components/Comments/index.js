@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Comment, Form, Button, Input, Divider } from "antd";
 import styled from "styled-components";
-import moment from "moment";
-import { CommentList } from "./CommentList";
+import CommentList from "./CommentList";
 
 const { TextArea } = Input;
 
@@ -10,10 +9,23 @@ const WrapperComment = styled.div`
   width: 80vw;
 `;
 
-const Editor = ({ onChange, onSubmit, submitting, value }) => (
+const Editor = ({ onChange, onSubmit, submitting, values }) => (
   <div>
     <Form.Item>
-      <TextArea rows={4} onChange={onChange} value={value} />
+      <Input
+        placeholder="Name..."
+        name="name"
+        onChange={onChange}
+        value={values.name}
+      />
+    </Form.Item>
+    <Form.Item>
+      <TextArea
+        rows={4}
+        onChange={onChange}
+        value={values.message}
+        name="message"
+      />
     </Form.Item>
     <Form.Item>
       <Button
@@ -30,46 +42,43 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 
 export default class extends Component {
   state = {
-    comments: [],
-    submitting: false,
-    value: ""
+    name: "",
+    message: ""
   };
 
   handleSubmit = () => {
-    if (!this.state.value) {
-      return;
-    }
+    const { name, message } = this.state;
+    const { onCreateComment, onGetPost, postId } = this.props;
 
-    this.setState({
-      submitting: true
-    });
+    if (name && message) {
+      const data = {
+        postId,
+        creator: name,
+        body: message
+      };
 
-    setTimeout(() => {
       this.setState({
-        submitting: false,
-        value: "",
-        comments: [
-          {
-            author: "Han Solo",
-            avatar:
-              "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            content: <p>{this.state.value}</p>,
-            datetime: moment().fromNow()
-          },
-          ...this.state.comments
-        ]
+        name: "",
+        message: ""
       });
-    }, 1000);
+
+      onCreateComment(data).then(() => {
+        onGetPost(postId);
+      });
+    }
   };
 
   handleChange = e => {
+    const { name, value } = e.target;
+
     this.setState({
-      value: e.target.value
+      [name]: value
     });
   };
 
   render() {
-    const { comments, submitting, value } = this.state;
+    const { submitting, name, message } = this.state;
+    const { comments } = this.props;
 
     return (
       <WrapperComment>
@@ -81,7 +90,7 @@ export default class extends Component {
               onChange={this.handleChange}
               onSubmit={this.handleSubmit}
               submitting={submitting}
-              value={value}
+              values={{ name, message }}
             />
           }
         />

@@ -1,18 +1,27 @@
-import {
-  GET_POST,
-  GET_POST_SUCCESS,
-  GET_POST_ERROR
-} from "../../actions/post/Types";
+import * as postActions from "../../actions/post/Types";
+import * as commentsActions from "../../actions/comments/Types";
+
 import initialState from "./initialState";
 import { getStatusCode } from "../../helpers/response";
 
-const userReducer = (state = initialState, action) => {
+const postReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_POST:
+    case postActions.GET_POST:
       return { ...state, loading: true };
-    case GET_POST_SUCCESS:
+    case postActions.GET_POST_SUCCESS:
       return { ...state, loading: false, post: action.payload.data };
-    case GET_POST_ERROR:
+    case postActions.GET_POST_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: getStatusCode(action.payload)
+      };
+
+    case commentsActions.CREATE_COMMMENT:
+      return { ...state, loading: true };
+    case commentsActions.CREATE_COMMMENT_SUCCESS:
+      return { ...state, loading: false };
+    case commentsActions.CREATE_COMMMENT_ERROR:
       return {
         ...state,
         loading: false,
@@ -23,4 +32,4 @@ const userReducer = (state = initialState, action) => {
   }
 };
 
-export default userReducer;
+export default postReducer;
