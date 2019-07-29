@@ -1,10 +1,7 @@
-import { all, takeLatest } from "redux-saga/effects";
-import { getUserData } from "./user";
+import { createRequestInstance, watchRequests } from "redux-saga-requests";
+import { createDriver } from "redux-saga-requests-axios";
 
-function* actionWatcher() {
-  yield takeLatest("GET_USER_REQUEST", getUserData);
-}
-
-export function* saga() {
-  yield all([actionWatcher()]);
+export function* saga(axiosInstance) {
+  yield createRequestInstance({ driver: createDriver(axiosInstance) });
+  yield watchRequests();
 }

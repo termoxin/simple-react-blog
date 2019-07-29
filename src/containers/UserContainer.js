@@ -11,15 +11,15 @@ class UserContainer extends Component {
   }
 
   render() {
-    const { user, loading } = this.props;
+    const { loading, user } = this.props;
 
-    return !loading && user ? <User user={user} /> : "Loading...";
+    return (!loading && user && <User user={user} />) || "Loading...";
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  user: user.user,
-  loading: user.loading
+const mapStateToProps = state => ({
+  user: state.user.user,
+  loading: state.user.loading
 });
 
 const mapDispatchToProps = {

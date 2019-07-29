@@ -1,11 +1,10 @@
-import { GET_USER_REQUEST } from "./Types";
+import { GET_USER } from "./Types";
 
 export const getUser = username => ({
-  type: GET_USER_REQUEST,
+  type: GET_USER,
   payload: {
     request: {
-      url: "/posts"
+      url: `/users/${username}`
     }
-  },
-  username
+  }
 });
