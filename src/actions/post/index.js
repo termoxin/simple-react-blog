@@ -15,8 +15,5 @@ export const createPost = data => ({
       method: "post",
       data
     }
-  },
-  meta: {
-    asPromise: true
   }
 });

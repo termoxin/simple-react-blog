@@ -2,7 +2,6 @@ import { createStore, compose, applyMiddleware } from "redux";
 import { createBrowserHistory } from "history";
 import { routerMiddleware } from "connected-react-router";
 import createSagaMiddleware from "redux-saga";
-import { createLogger } from "redux-logger";
 import { requestsPromiseMiddleware } from "redux-saga-requests";
 import axios from "axios";
 
@@ -15,14 +14,11 @@ const sagaMiddleware = createSagaMiddleware();
 const initialState = {};
 const enhancers = [];
 
-const logger = createLogger();
-
 const composedEnhancers = compose(
   applyMiddleware(
     routerMiddleware(history),
     requestsPromiseMiddleware(),
-    sagaMiddleware,
-    logger
+    sagaMiddleware
   ),
   ...enhancers
 );

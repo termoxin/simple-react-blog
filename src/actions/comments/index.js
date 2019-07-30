@@ -8,8 +8,5 @@ export const createComment = data => ({
       method: "post",
       data
     }
-  },
-  meta: {
-    asPromise: true
   }
 });

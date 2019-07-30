@@ -1,6 +1,2 @@
-export const shortenText = (text, length = 200) => {
-  if (text.length >= length) {
-    return text.slice(0, length - 3) + "...";
-  }
-  return text;
-};
+export const shortenText = (text, length = 200) =>
+  text.length >= length ? text.slice(0, length - 3) + "..." : text;

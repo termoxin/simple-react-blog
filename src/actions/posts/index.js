@@ -6,8 +6,5 @@ export const getPosts = () => ({
     request: {
       url: "/posts"
     }
-  },
-  meta: {
-    asPromise: true
   }
 });

@@ -43,7 +43,11 @@ class PostsContainer extends Component {
   };
 
   componentDidMount() {
-    this.props.getPosts();
+    const { posts } = this.props;
+
+    if (!posts) {
+      this.props.getPosts();
+    }
   }
 
   render() {
