@@ -17,7 +17,7 @@ const Post = ({
   onGetPost,
   isCreatingComment
 }) => {
-  const { title, body, creator, id } = content;
+  const { title, body, creator, id, date } = content;
 
   return (
     <StyledLayout theme="light">
@@ -25,6 +25,8 @@ const Post = ({
         <Title>{title}</Title>
         <Paragraph>{body}</Paragraph>
         <Text>Author: {creator || "Unknown"}</Text>
+        <br />
+        <Text underline>{moment(date).fromNow()}</Text>
       </Content>
       {comments && (
         <Comments
