@@ -20,7 +20,12 @@ class PostsContainer extends Component {
     const { name, author, text } = this.state;
 
     if (name && author && text) {
-      createPost({ title: name, creator: author, body: text });
+      createPost({
+        title: name,
+        creator: author,
+        body: text,
+        date: new Date()
+      });
 
       this.setState({
         visible: false

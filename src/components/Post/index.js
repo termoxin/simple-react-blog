@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography } from "antd";
+import moment from "moment";
 import styled from "styled-components";
 import { StyledLayout } from "./StyledLayout";
 import Comments from "../Comments";
