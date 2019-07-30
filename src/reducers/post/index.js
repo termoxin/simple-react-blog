@@ -18,14 +18,22 @@ const postReducer = (state = initialState, action) => {
       };
 
     case commentsActions.CREATE_COMMMENT:
-      return { ...state, loading: true };
+      return { ...state, isCreatingComment: true };
     case commentsActions.CREATE_COMMMENT_SUCCESS:
-      return { ...state, loading: false };
+      const comment = action.payload.response.data;
+      const updatedComments = [...state.post[1], comment];
+      const post = [state.post[0], updatedComments];
+
+      return {
+        ...state,
+        post,
+        isCreatingComment: false
+      };
     case commentsActions.CREATE_COMMMENT_ERROR:
       return {
         ...state,
-        loading: false,
-        error: getStatusCode(action.payload)
+        error: getStatusCode(action.payload),
+        isCreatingComment: false
       };
     default:
       return state;

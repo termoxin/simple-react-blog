@@ -10,7 +10,12 @@ const Content = styled.div`
   width: 80vw;
 `;
 
-const Post = ({ post: [content, comments], onCreateComment, onGetPost }) => {
+const Post = ({
+  post: [content, comments],
+  onCreateComment,
+  onGetPost,
+  isCreatingComment
+}) => {
   const { title, body, creator, id } = content;
 
   return (
@@ -26,6 +31,7 @@ const Post = ({ post: [content, comments], onCreateComment, onGetPost }) => {
           onCreateComment={onCreateComment}
           onGetPost={onGetPost}
           postId={id}
+          isCreatingComment={isCreatingComment}
         />
       )}
     </StyledLayout>

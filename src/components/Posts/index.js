@@ -49,7 +49,7 @@ const Posts = ({
         style={{ width: "100%" }}
       >
         <p>{shortenText(body)}</p>
-        <Text strong> Author: {"Unknown" || creator}</Text>
+        <Text strong> Author: {creator || "Unknown"}</Text>
       </Card>
     </CardContainer>
   ));

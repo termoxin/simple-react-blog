@@ -48,7 +48,7 @@ export default class extends Component {
 
   handleSubmit = () => {
     const { name, message } = this.state;
-    const { onCreateComment, onGetPost, postId } = this.props;
+    const { onCreateComment, postId } = this.props;
 
     if (name && message) {
       const data = {
@@ -62,9 +62,7 @@ export default class extends Component {
         message: ""
       });
 
-      onCreateComment(data).then(() => {
-        onGetPost(postId);
-      });
+      onCreateComment(data);
     }
   };
 
@@ -77,8 +75,8 @@ export default class extends Component {
   };
 
   render() {
-    const { submitting, name, message } = this.state;
-    const { comments } = this.props;
+    const { name, message } = this.state;
+    const { comments, isCreatingComment } = this.props;
 
     return (
       <WrapperComment>
@@ -89,7 +87,7 @@ export default class extends Component {
             <Editor
               onChange={this.handleChange}
               onSubmit={this.handleSubmit}
-              submitting={submitting}
+              submitting={isCreatingComment}
               values={{ name, message }}
             />
           }

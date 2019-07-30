@@ -16,13 +16,11 @@ class PostsContainer extends Component {
   };
 
   handleOk = () => {
-    const { getPosts, createPost } = this.props;
+    const { createPost } = this.props;
     const { name, author, text } = this.state;
 
     if (name && author && text) {
-      createPost({ title: name, creator: author, body: text }).then(() => {
-        getPosts();
-      });
+      createPost({ title: name, creator: author, body: text });
 
       this.setState({
         visible: false

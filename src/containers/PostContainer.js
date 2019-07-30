@@ -9,17 +9,31 @@ import { createComment } from "../actions/comments";
 
 class PostContainer extends Component {
   componentDidMount() {
-    const id = this.props.match.params.id;
+    const { match, getPost } = this.props;
 
-    this.props.getPost(id);
+    const id = match.params.id;
+
+    getPost(id);
   }
 
   render() {
-    const { loading, post, error, createComment, getPost } = this.props;
+    const {
+      loading,
+      post,
+      error,
+      createComment,
+      getPost,
+      isCreatingComment
+    } = this.props;
 
     if (!loading && !_.isNull(post)) {
       return (
-        <Post post={post} onCreateComment={createComment} onGetPost={getPost} />
+        <Post
+          post={post}
+          onCreateComment={createComment}
+          onGetPost={getPost}
+          isCreatingComment={isCreatingComment}
+        />
       );
     } else {
       return error ? <PostNotFound /> : <Spinner />;
@@ -30,6 +44,7 @@ class PostContainer extends Component {
 const mapStateToProps = state => ({
   post: state.post.post,
   loading: state.post.loading,
+  isCreatingComment: state.post.isCreatingComment,
   error: state.post.error
 });
 
